@@ -208,7 +208,7 @@ def highPrescriptionOpioidsrPageView(request):
 
 def overallPrescriptionsPageView(request):
 
-    sQuery = "SELECT ot.prescriberid, ROUND((cast(OpioidCount as float)/cast(SUM(qty) as float))::numeric, 2)*100 as PctOpioids FROM pd_triple t INNER JOIN(SELECT prescriberid, SUM(qty) as OpioidCount FROM pd_triple t2 INNER JOIN pd_drugs d2 ON t2.drugname = d2.drugname WHERE isopioid = 'True' GROUP BY prescriberid) as ot ON t.prescriberid = ot.prescriberid GROUP BY ot.prescriberid, OpioidCount HAVING  ROUND((cast(OpioidCount as float)/cast(SUM(qty) as float))::numeric, 2)*100 > 70 ORDER BY PctOpioids desc;"
+    sQuery = "select drugid, d.drugname, sum(qty) as QtyPrescribed from pd_drugs d inner join pd_triple t on t.drugname = d.drugname where isopioid = 'True' group by d.drugname, drugid order by sum(qty) desc LIMIT 10"
 
     prescribers = OverallPrescriptions.objects.raw(sQuery)
 

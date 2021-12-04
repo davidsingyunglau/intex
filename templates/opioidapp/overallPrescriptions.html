@@ -1,6 +1,24 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-overallPrescriptions
+<h1>Top 5 Drugs</h1>
+
+<table>
+    <tr>
+        <th>Prescribers:</th>
+        <th>Opioid Prescription Percentage:</th>
+    </tr>
+    {% for counter in prescribers %}
+    <tr>
+        <td>
+            {{counter.drugname}}
+        <td>
+        <td>
+            {{counter.qtyprescribed }}
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
 
 
 {% endblock %}
