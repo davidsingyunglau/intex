@@ -79,7 +79,9 @@ class highOpioids(models.Model):
         pctopioids = models.FloatField()
 
 class OverallPrescriptions(models.Model):
-        prescriberid = models.IntegerField(primary_key=True)
+        drugid = models.IntegerField(primary_key=True)
+        drugname = models.CharField(max_length=30)
+        qtyprescribed = models.IntegerField()
 
 
 
