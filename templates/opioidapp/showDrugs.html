@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<!-- Drug Form -->
+<div>
+    <form name="form" method="get" action="{% url 'searchDrugs' %}">
+        {% csrf_token %}
+
+        <input type="hidden" id="drugid" name="drugid" />
+
+        <label for="drugname">Enter the drug name:</label>
+        <input type="text" name="drugname" id="drugname" />
+        <br /><br />
+
+        <label for="isopioid">Opiate Drug?</label>
+        <select name="isopioid" id="isopioid">
+            <option value="FALSE">No</option>
+            <option value="TRUE">Yes</option>
+        </select>
+        <br /><br />
+
+        <button type="submit">Search</button>
+    </form>
+    <br /><br />
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th hidden>Drug ID</th>
+            <th></th>
+            <th>Drug Name</th>
+            <th>Isopioid</th>
+        </tr>
+        {% for counter in drugs %}
+        <tr>
+            <td hidden>{{counter.drugid}}</td>
+            <td></td>
+            <td>
+                <a href="{% url 'showSingleDrug' drugid=counter.drugid%}">{{counter.drugname}}</a>
+            </td>
+            <td>{{counter.isopioid}}</td>
+            <td></td>
+        </tr>
+
+        {%endfor%}
+    </table>
+</div>
+
+<script defer>
+    function doSometing() {
+        document.getElementById("isopioid").value = "{{drugs.isopioid}}";
+    }
+
+    doSometing();
+</script>
+{% endblock %}

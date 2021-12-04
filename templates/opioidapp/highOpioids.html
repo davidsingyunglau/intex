@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+
+<table>
+    <h1> High Opioid Prescribers</h1>
+    <tr>
+        <th>Prescribers:</th>
+        <th>Opioid Prescription Percentage:</th>
+    </tr>
+    {% for counter in prescribers %}
+    <tr>
+        <td>
+            {{counter.prescriberid}}
+        <td>
+        <td>
+            {{counter.pctopioids }}
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+{% endblock %}

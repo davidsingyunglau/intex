@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container">
+    <table>
+        <tr>
+            <th>Drug ID</th>
+            <th>Drug Name</th>
+            <th>Opioid</th>
+        </tr>
+        {% for drug in drugs %}
+        <tr>
+            <td>
+                <a href="{% url 'showSingleDrug' drugid=drug.drugid %}">{{ drug.drugname }}</a>
+            </td>
+            <td>{{ drug.id }}</td>
+            <td>{{ drug.drugname }}</td>
+            <td>{{ drug.isopioid }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
